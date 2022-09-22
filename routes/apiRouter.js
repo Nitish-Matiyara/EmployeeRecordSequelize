@@ -39,12 +39,12 @@ router.get("/:employeeId", (req, res, next) => {
 //--- CREATE an employee-------
 router.post("/", async (req, res, next) => {
   try {
-    const { name, position, email, wage } = req.body;
-    if (!name || !position || !wage) {
+    const { name, email } = req.body;
+    if (!name || !email) {
       return res.sendStatus(400);
     }
 
-    const employee = await insertEmployee(name, position, email, wage).then(
+    const employee = await insertEmployee(name, email).then(
       () => res.json({ message: "Employee created." })
     );
   } catch (e) {
@@ -56,16 +56,14 @@ router.post("/", async (req, res, next) => {
 //----UPDATE an employee-------------
 router.put("/:employeeId", async (req, res, next) => {
   try {
-    const { name, position, email, wage, employeeId } = req.body;
-    if (!name || !position || !wage) {
+    const { name, email, employeeId } = req.body;
+    if (!name || !email) {
       return res.sendStatus(400);
     }
 
     const employee = await updateEmployee(
       name,
-      position,
       email,
-      wage,
       employeeId
     ).then(() => {
       return getOneEmployee(employeeId);

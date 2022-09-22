@@ -25,5 +25,13 @@ const sequelize = new Sequelize(database, user, password, {
 db.sequelize = sequelize;
 
 db.Employee = require("../models/employee")
+db.EmployeeRecord = require("../models/employeeRecord") 
 
-sequelize.sync()
+db.Setting = require("../models/Settings") //1-1
+db.Company = require("../models/company")  //1-Many
+
+db.Project = require("../models/project")   // Many-Many
+db.Employee_project = require("../models/employee_project") //--Junction table
+
+
+sequelize.sync({alter : true})

@@ -10,12 +10,13 @@ module.exports = {
   deleteEmployee,
 };
 
-async function insertEmployee(name, position, email, wage) {
-  await Employee.create({ name, position, email, wage });
+async function insertEmployee(name, email ) {
+ const employee =  await Employee.create({ name,  email})
+  return employee;
 }
 
-async function updateEmployee(name, position, email, wage, id) {
-  await Employee.update({ name, position, email, wage }, { where: { id: id } });
+async function updateEmployee(name, email,  id) {
+  await Employee.update({ name, email,  }, { where: { id: id } });
 }
 
 async function getOneEmployee(id) {
